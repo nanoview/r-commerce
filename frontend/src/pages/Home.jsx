@@ -1,8 +1,9 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Banner from "../components/Banner";
-import Filters from "../components/Filters";
-import ProductList from "../components/ProductList";
+import Navbar from "./Navbar";
+import Banner from "./Banner";
+import Filters from "./Filters";
+import ProductList from "./ProductList";
+import "./Home.css";
 
 const Home = () => {
   return (
