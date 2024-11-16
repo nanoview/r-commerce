@@ -7,7 +7,7 @@ import ProductForm from './ProductForm';
 import ProductTable from './ProductTable';
 import ProductManagement from './ProductManagement';
 
-const ProductComponent = ({ token }) => {
+const Dashboard = ({ token }) => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({ name: '', price: '', quantity: '', description: '', photo: '' });
   const navigate = useNavigate();
@@ -113,4 +113,4 @@ const ProductComponent = ({ token }) => {
   );
 };
 
-export default ProductComponent;
+export default Dashboard;

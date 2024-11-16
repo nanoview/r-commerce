@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthComponent from "./components/AuthComponent";
-import ProductComponent from "./components/ProductComponent";
+import Dashboard from "./components/Dashboard";
 import LogoutComponent from "./components/LogoutComponent";
 import Navbar from "./pages/Navbar";
 import Banner from "./pages/Banner";
@@ -15,7 +15,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/admin" element={<AuthComponent setToken={setToken} />} />
-        <Route path="/dashboard/*" element={<ProductComponent token={token} />} />
+        <Route path="/dashboard/*" element={<Dashboard token={token} />} />
         <Route path="/logout" element={<LogoutComponent setToken={setToken} />} />
         <Route path="/" element={
           <div className="app">

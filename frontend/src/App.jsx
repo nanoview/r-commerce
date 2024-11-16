@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthComponent from "./components/AuthComponent";
-import ProductComponent from "./components/ProductComponent";
+import Dashboard from "./components/Dashboard";
 import LogoutComponent from "./components/LogoutComponent";
-import Home from "./pages/Home";
+import Home from "./Home";
 import "./styles/GlobalStyles.css"; // Updated to use the combined styles
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
           <Route path="/admin" element={<AuthComponent setToken={setToken} />} />
           <Route
             path="/dashboard/*"
-            element={<ProductComponent token={token} />}
+            element={<Dashboard token={token} />}
           />
           <Route
             path="/logout"
