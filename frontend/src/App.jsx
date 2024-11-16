@@ -1,11 +1,10 @@
+//App.jsx
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthComponent from "./components/AuthComponent";
 import ProductComponent from "./components/ProductComponent";
 import LogoutComponent from "./components/LogoutComponent";
 import Home from "./pages/Home";
-import Banner from "./pages/Banner";
-import ProductList from "./pages/ProductList";
 import "./components/Styles.css";
 
 const App = () => {

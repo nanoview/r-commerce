@@ -30,44 +30,11 @@ const products = [
 ];
 
 const ProductList = () => {
-  const [productss, setProductss] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/products");
-        setProductss(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
   return (
-    <div>
-      <div className="product-list">
-        {products.map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))}
-      </div>
-      <hr />
-
-      <div>
-        {products.length > 0 ? (
-          productss.map((product) => (
-            <div key={product._id}>
-              <h3>{product.pName}</h3>
-              {/* <p>{product.pDescription}</p> */}
-              <p>Price: ${product.pPrice}</p>
-              <img src={product.pImages[0]} alt={product.pName} />
-            </div>
-          ))
-        ) : (
-          <p>No products available.</p>
-        )}
-      </div>
+    <div className="product-list container">
+      {products.map((product, index) => (
+        <ProductCard key={index} product={product} />
+      ))}
     </div>
   );
 };

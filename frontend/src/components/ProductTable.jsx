@@ -8,8 +8,10 @@ const ProductTable = ({ products, updateProduct, deleteProduct }) => {
           <th>Name</th>
           <th>Image</th>
           <th>Price</th>
-          <th>Quantity</th>
-          <th>Stock</th>
+          <th>In Stock</th>
+          <th>Sold Out</th>
+          <th>Delivered</th>
+          <th>Pending Del</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -20,6 +22,8 @@ const ProductTable = ({ products, updateProduct, deleteProduct }) => {
             <td>{product.name}</td>
             <td>{product.photo}</td>
             <td>{product.price}</td>
+            <td>{product.quantity}</td>
+            <td>{product.quantity}</td>
             <td>{product.quantity}</td>
             <td>{product.quantity}</td>
             <td className="actions">
