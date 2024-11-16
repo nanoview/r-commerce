@@ -14,14 +14,8 @@ const App = () => {
       <div className="app">
         <Routes>
           <Route path="/admin" element={<AuthComponent setToken={setToken} />} />
-          <Route
-            path="/dashboard/*"
-            element={<Dashboard token={token} />}
-          />
-          <Route
-            path="/logout"
-            element={<LogoutComponent setToken={setToken} />}
-          />
+          <Route path="/dashboard/*" element={<Dashboard token={token} />} />
+          <Route path="/logout" element={<LogoutComponent setToken={setToken} />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>

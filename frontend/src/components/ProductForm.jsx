@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './styles.css'; // Import the CSS file
 
 const ProductForm = ({ newProduct, setNewProduct, addProduct }) => {
   const [photoLink, setPhotoLink] = useState('');

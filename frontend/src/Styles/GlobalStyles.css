@@ -8,17 +8,17 @@
   }
   
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
   }
   
   /* Common Layout */
   .container {
-    width: 90%; /* Consolidated from both */
+    width: 100%; /* Consolidated from both */
     margin: 0 auto;
+    background-color: #f7f7f7;
   }
   
-  .navbar,
-  .homeNavbar {
+  .navbar {
     display: flex;
     justify-content: space-between;
     margin: 20px 10px;

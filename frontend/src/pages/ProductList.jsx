@@ -31,10 +31,12 @@ const products = [
 
 const ProductList = () => {
   return (
-    <div className="product-list container">
+    <div class="container">
+    <div className="product-list">
       {products.map((product, index) => (
         <ProductCard key={index} product={product} />
       ))}
+    </div>
     </div>
   );
 };
