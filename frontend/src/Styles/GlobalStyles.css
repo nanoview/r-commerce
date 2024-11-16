@@ -1,3 +1,6 @@
+/* ./src/styles/GlobalStyles.css */
+
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -8,21 +11,24 @@
     font-family: Arial, sans-serif;
   }
   
+  /* Common Layout */
   .container {
-    width: 90%;
+    width: 90%; /* Consolidated from both */
     margin: 0 auto;
   }
-
-  .navbar{
-    display:flex;
+  
+  .navbar,
+  .homeNavbar {
+    display: flex;
     justify-content: space-between;
     margin: 20px 10px;
     flex-wrap: wrap;
   }
-
-  .banner, .filters, .product-list {
+  
+  .banner,
+  .filters,
+  .product-list {
     margin: 20px 0;
-    
   }
   
   .banner {
@@ -31,6 +37,12 @@
     align-items: center;
     background-color: #f7f7f7;
     padding: 20px;
+  }
+  
+  .banner img {
+    max-width: 80%;
+    object-fit: contain;
+    margin-right: 10%;
   }
   
   .filters {
@@ -51,7 +63,7 @@
     border-radius: 5px;
     padding: 10px;
     width: calc(25% - 20px);
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
   
@@ -59,30 +71,30 @@
     max-width: 100%;
     border-radius: 5px;
   }
-
-  .navItems a{
+  
+  .navItems a {
     margin: 0 10px;
     text-decoration: none;
     color: black;
   }
-
   
+  /* Responsive Design */
   @media only screen and (max-width: 768px) {
     .product-card {
       width: calc(50% - 20px);
     }
   }
-
+  
   @media only screen and (max-width: 400px) {
     .product-card {
-      width: 100%; /* Full-width on small screens */
+      width: 100%;
       padding: 10px;
       margin: 5px;
       font-size: 14px;
     }
   
     .product-card img {
-      width: 100%; /* Ensure images scale properly */
+      width: 100%;
       height: auto;
     }
   

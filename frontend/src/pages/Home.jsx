@@ -1,14 +1,12 @@
-//Home.jsx
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar"; // Updated import paths for clarity
 import Banner from "./Banner";
 import Filters from "./Filters";
 import ProductList from "./ProductList";
-import "./Home.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="home">
       <Navbar />
       <Banner />
       <Filters />

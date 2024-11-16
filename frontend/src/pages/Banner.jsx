@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <div className="banner container">
+    <div className="banner">
       <div>
         <h2>Grab Up to 50% Off On Selected Headphones</h2>
         <button>Buy Now</button>
