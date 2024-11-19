@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import ProductForm from './ProductForm';
 import ProductTable from './ProductTable';
 import ProductManagement from './ProductManagement';
+import BannerForm from './BannerForm';
 import "../styles/Dashboard.css"; 
 
 const Dashboard = ({ token }) => {
@@ -106,6 +107,7 @@ const Dashboard = ({ token }) => {
           <Routes>
             <Route path="product-form" element={<ProductForm newProduct={newProduct} setNewProduct={setNewProduct} addProduct={addProduct} />} />
             <Route path="product-table" element={<ProductTable products={products} updateProduct={updateProduct} deleteProduct={deleteProduct} />} />
+            <Route path="banner-management" element={<BannerForm />} />
             <Route path="product-management" element={<ProductManagement products={products} newProduct={newProduct} setNewProduct={setNewProduct} addProduct={addProduct} updateProduct={updateProduct} deleteProduct={deleteProduct} />} />
           </Routes>
         </div>

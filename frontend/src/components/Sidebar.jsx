@@ -12,6 +12,7 @@ const Sidebar = () => {
           <li><Link to="/dashboard/product-form">Add Product</Link></li>
           <li><Link to="/dashboard/product-table">Product List</Link></li>
           <li><Link to="/dashboard/product-management">Manage Products</Link></li>
+          <li><Link to="/dashboard/banner-management">Update Banner</Link></li>
           <li><Link to="/dashboard/order-status">Order status</Link></li>
           <li><Link to="/dashboard/Customer-List">Customer List</Link></li>
           <li><Link to="/logout">Logout</Link></li>

@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import "../styles/Banner.css"; // CSS for styling and animations
+import axios from "axios";
 
 const Banner = () => {
+  const [banner, setBanner] = useState({
+    heading: "",
+    buttonText: "",
+    image: "",
+  });
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const { data } = await axios.get("/api/banner");
+        setBanner(data);
+      } catch (error) {
+        console.error("Error fetching banner data:", error);
+      }
+    };
+
+    fetchBanner();
+  }, []);
+
   return (
     <div className="banner">
-      <div>
-        <h2>Grab Up to 50% Off On Selected Headphones</h2>
-        <button>Buy Now</button>
+      <div className="banner-content animate-text">
+        <h2>{banner.heading || "Default Heading"}</h2>
+        <button>{banner.buttonText || "Default Button"}</button>
       </div>
-      <img src="https://static.vecteezy.com/system/resources/previews/004/299/835/original/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-free-vector.jpg" alt="Headphones"  width="100%"/>
+      <div className="banner-image animate-image">
+        <img
+          src={
+            banner.image ||
+            "https://via.placeholder.com/800x400?text=Default+Banner+Image"
+          }
+          alt="Banner"
+        />
+      </div>
     </div>
   );
 };

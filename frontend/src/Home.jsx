@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./pages/Navbar"; // Updated import paths for clarity
+import Navbar from "./pages/homeNavbar"; // Updated import paths for clarity
 import Banner from "./pages/Banner";
 import Filters from "./pages/Filters";
 import ProductList from "./pages/ProductList";
