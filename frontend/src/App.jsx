@@ -7,10 +7,11 @@ import Home from "./Home";
 import "./styles/GlobalStyles.css"; // Updated to use the combined styles
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  const [token, setToken] = useState(() => localStorage?.getItem("token") || "");
 
   return (
-    <Router>
+    //Enable the v7 behavior early by adding the future.v7_relativeSplatPath 
+    <Router future={{v7_relativeSplatPath:true}}> 
       <div className="app">
         <Routes>
           <Route path="/admin" element={<AuthComponent setToken={setToken} />} />

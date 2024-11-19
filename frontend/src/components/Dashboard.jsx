@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import ProductForm from './ProductForm';
 import ProductTable from './ProductTable';
 import ProductManagement from './ProductManagement';
-import "../styles/GlobalStyles.css"; 
+import "../styles/Dashboard.css"; 
 
 const Dashboard = ({ token }) => {
   const [products, setProducts] = useState([]);

@@ -1,0 +1,109 @@
+/* Dashboard.css */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8); /* Similar to navbar color */
+  }
+  
+  .navbar {
+    height: 70px; /* Adjust to match your Navbar height */
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Navbar background color */
+    color: #fff;
+  }
+  
+  .main-content {
+    display: flex;
+    flex: 1; /* Occupy remaining space */
+    overflow: hidden;
+  }
+  
+  .sidebar {
+    width: 250px;
+    height: calc(100vh - 70px); /* Adjust for Navbar height */
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out; /* Smooth transition */
+  }
+  
+  .sidebar.collapsed {
+    width: 0;
+    display: none; /* Hides the sidebar on collapse */
+  }
+  
+  .content {
+    flex: 1; /* Fill remaining horizontal space */
+    background: #f4f4f4;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content > * {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Mobile Menu (Hamburger) */
+  .hamburger-menu {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .hamburger-menu div {
+    background: #fff;
+    height: 4px;
+    margin: 5px 0;
+    width: 25px;
+    border-radius: 2px;
+  }
+  
+  /* Media Query for mobile responsiveness */
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column; /* Stack sidebar and content vertically */
+    }
+  
+    .sidebar {
+      width: 0; /* Sidebar is hidden initially */
+      position: fixed; /* Fix the sidebar at the top left */
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 10;
+      transition: width 0.3s ease-in-out;
+    }
+  
+    .sidebar.collapsed {
+      width: 0;
+    }
+  
+    .content {
+      margin-left: 0;
+      padding-top: 70px; /* To avoid content being hidden under Navbar */
+    }
+  
+    .hamburger-menu {
+      display: flex; /* Display hamburger menu on mobile */
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 15;
+    }
+  
+    .navbar {
+      position: relative; /* Allow the hamburger menu to sit on top */
+    }
+  
+    .content {
+      padding: 20px;
+    }
+  }
+  

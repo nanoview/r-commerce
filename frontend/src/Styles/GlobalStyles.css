@@ -17,14 +17,7 @@
     margin: 0 auto;
     background-color: #f7f7f7;
   }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 10px;
-    flex-wrap: wrap;
-  }
-  
+    
   .banner,
   .filters,
   .product-list {
@@ -72,12 +65,7 @@
     border-radius: 5px;
   }
   
-  .navItems a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: black;
-  }
-  
+
   /* Responsive Design */
   @media only screen and (max-width: 768px) {
     .product-card {
