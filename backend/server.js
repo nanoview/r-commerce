@@ -10,6 +10,8 @@ dotenv.config();
 
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
+const bannerRoutes = require('./routes/bannerRoute');
+const testRoute = require('./routes/testRoute');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,6 +41,8 @@ connectDB(); // Invoke the function to connect to MongoDB
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', productRoutes);
+app.use('/api', bannerRoutes);
+app.use('/api', testRoute);
 
 // File Upload Configuration
 const upload = multer({ dest: 'uploads/' });

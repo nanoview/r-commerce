@@ -15,6 +15,7 @@ const Sidebar = () => {
           <li><Link to="/dashboard/banner-management">Update Banner</Link></li>
           <li><Link to="/dashboard/order-status">Order status</Link></li>
           <li><Link to="/dashboard/Customer-List">Customer List</Link></li>
+          <li><Link to="/dashboard/test-form">Test Form</Link></li>
           <li><Link to="/logout">Logout</Link></li>
         </ul>
       </nav>

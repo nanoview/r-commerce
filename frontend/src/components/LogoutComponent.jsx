@@ -8,7 +8,7 @@ const LogoutComponent = ({ setToken }) => {
     // Clear the token and redirect to login
     localStorage.removeItem('token');
     setToken('');
-    navigate('/admin');
+    navigate('/');
   }, [setToken, navigate]);
 
   return (
