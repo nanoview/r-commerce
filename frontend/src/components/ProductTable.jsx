@@ -1,10 +1,12 @@
 import React from 'react';
+import '../styles/ProductTable.css';
 
 const ProductTable = ({ products, updateProduct, deleteProduct }) => {
   return (
     <table>
       <thead>
         <tr>
+          <th>Product ID</th>
           <th>Name</th>
           <th>Image</th>
           <th>Price</th>
@@ -19,8 +21,11 @@ const ProductTable = ({ products, updateProduct, deleteProduct }) => {
       <tbody>
         {products.map(product => (
           <tr key={product._id}>
+            <td>{product._id}</td>
             <td>{product.name}</td>
-            <td>{product.photo}</td>
+            <td>
+            <img src={product.photo} alt={product.name} width="150" height="50" />
+            </td>
             <td>{product.price}</td>
             <td>{product.quantity}</td>
             <td>{product.quantity}</td>

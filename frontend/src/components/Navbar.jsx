@@ -12,12 +12,12 @@ const Navbar = () => {
       </nav>
       <nav>
         <ul>
-        <li><Link to="/dashboard/">Your link and .</Link></li>
+        <li><Link to="/dashboard/">Sold</Link></li>
           <li><Link to="/dashboard/product-form">Your link and .</Link></li>
           <li><Link to="/dashboard/product-table">Your link and .</Link></li>
           <li><Link to="/dashboard/product-management">Your link and .</Link></li>
           <li><Link to="/dashboard/order-status">Your link and .</Link></li>
-          <li><Link to="/dashboard/Customer-List">Your link and .</Link></li>
+          <li><Link to="/dashboard/Customer-List">Customer Message</Link></li>
         </ul>
       </nav>
   </div>
