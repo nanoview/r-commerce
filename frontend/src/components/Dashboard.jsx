@@ -1,3 +1,4 @@
+//Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -13,6 +14,7 @@ import "../styles/Dashboard.css";
 const Dashboard = ({ token }) => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({ name: '', price: '', quantity: '', description: '', photo: '' });
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,12 +101,19 @@ const Dashboard = ({ token }) => {
     resetTimer(); // Start the timer
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
+
   return (
     <div className="dashboard">
       <Navbar />
+      <button className="burger" onClick={toggleSidebar}>
+        ☰
+      </button>
       <div className="main-content">
-        <Sidebar />
-        <div className="content">
+        <Sidebar isSidebarVisible={isSidebarVisible} />
+        <div className={`content ${isSidebarVisible ? 'shifted' : ''}`}>
           <Routes>
             <Route path="product-form" element={<ProductForm newProduct={newProduct} setNewProduct={setNewProduct} addProduct={addProduct} />} />
             <Route path="product-table" element={<ProductTable products={products} updateProduct={updateProduct} deleteProduct={deleteProduct} />} />

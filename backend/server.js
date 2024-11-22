@@ -10,7 +10,7 @@ dotenv.config();
 
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
-const bannerRoutes = require('./routes/bannerRoute');
+const bannerRoutes = require('./routes/bannerRoutes');
 const testRoute = require('./routes/testRoute');
 
 const app = express();
@@ -38,6 +38,8 @@ const connectDB = async () => {
 
 connectDB(); // Invoke the function to connect to MongoDB
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', productRoutes);

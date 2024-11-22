@@ -1,24 +1,13 @@
 import React from "react";
+import "../styles/HomeNavbar.css"; // Import the CSS file
 
-
-const Navbar = () => {
+const HomeNavbar = () => {
   return (
-    <div className="navbar">
+    <div className="navbar-container">
       <h3>Bioscope Handy craft</h3>
       <p>bioscopehandycrafts.com</p>
-      <nav className="navItems">
-        <a href="#">Categories</a>
-        <a href="#">Deals</a>
-        <a href="#">What's New</a>
-        <a href="#">Delivery</a>
-      </nav>
-      <div>
-        <input type="text" placeholder="Search Product" />
-        <button>Account</button>
-        <button>Cart</button>
-      </div>
     </div>
   );
 };
 
-export default Navbar;
+export default HomeNavbar;
