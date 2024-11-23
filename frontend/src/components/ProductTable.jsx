@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/ProductTable.css';
 import '../styles/Modal.css'; // New CSS for modal responsiveness
 
+
 const ProductTable = ({ products, updateProduct, deleteProduct }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [updatedProduct, setUpdatedProduct] = useState({});
@@ -30,9 +31,7 @@ const ProductTable = ({ products, updateProduct, deleteProduct }) => {
     formData.append('name', updatedProduct.name);
     formData.append('price', updatedProduct.price);
     formData.append('quantity', updatedProduct.quantity);
-    if (newImage) {
-      formData.append('photo', newImage);
-    }
+    if (newImage) formData.append('photo', newImage);
     formData.append('photoUrl', imageUrl);
 
     try {
@@ -68,7 +67,7 @@ const ProductTable = ({ products, updateProduct, deleteProduct }) => {
               <td>{product._id}</td>
               <td>{product.name}</td>
               <td>
-                <img src={product.photo || product.photoUrl} alt={product.name} width="150" />
+                <img src={product.photo ? `http://localhost:5000/uploads/${product.photo}` : product.photoUrl} alt={product.name} width="150" />
               </td>
               <td>{product.price}</td>
               <td>{product.quantity}</td>
