@@ -1,8 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 
 const ProductCard = ({ product, loading }) => {
+  const navigate = useNavigate();
+
+  const handlePhotoClick = () => {
+    navigate(`/product/${product._id}`);
+  };
+
   if (loading) {
     return (
       <div className="product-card skeleton">
@@ -14,10 +19,18 @@ const ProductCard = ({ product, loading }) => {
     );
   }
 
+  const productImage = (
+    <img
+      src={product.photo ? `http://localhost:5000/uploads/${product.photo}` : product.photoUrl}
+      alt={product.name}
+      onClick={handlePhotoClick}
+    />
+  );
+
   return (
     <div className="product-card">
       <Link to={`/product/${product._id}`}>
-          <img src={product.photo ? `http://localhost:5000/uploads/${product.photo}` : product.photoUrl} alt={product.name} />
+        {productImage}
       </Link>
       <h3>{product.name}</h3>
       <p>${product.price}</p>

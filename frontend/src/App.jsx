@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthComponent from "./components/AuthComponent";
 import Dashboard from "./components/Dashboard";
 import LogoutComponent from "./components/LogoutComponent";
+import ProductDetail from "./pages/ProductDetail";
 import Home from "./Home";
 import "./styles/GlobalStyles.css"; // Updated to use the combined styles
 
@@ -10,10 +11,10 @@ const App = () => {
   const [token, setToken] = useState(() => localStorage?.getItem("token") || "");
 
   return (
-    //Enable the v7 behavior early by adding the future.v7_relativeSplatPath 
-    <Router future={{v7_relativeSplatPath:true}}> 
+    <Router>
       <div className="app">
         <Routes>
+          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/admin" element={<AuthComponent setToken={setToken} />} />
           <Route path="/dashboard/*" element={<Dashboard token={token} />} />
           <Route path="/logout" element={<LogoutComponent setToken={setToken} />} />

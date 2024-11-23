@@ -4,6 +4,7 @@ import Banner from "./pages/Banner";
 import Filters from "./pages/Filters";
 import ProductList from "./pages/ProductList";
 
+
 const Home = () => {
   return (
     <div className="home">
