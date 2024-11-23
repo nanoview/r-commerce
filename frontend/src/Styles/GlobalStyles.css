@@ -43,54 +43,5 @@
     justify-content: space-between;
   }
   
-  .product-list {
-    margin: 20px;
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+ 
   
-  .product-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    width: calc(25% - 20px);
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .product-card img {
-    max-width: 100%;
-    border-radius: 5px;
-  }
-  
-
-  /* Responsive Design */
-  @media only screen and (max-width: 768px) {
-    .product-card {
-      width: calc(50% - 20px);
-    }
-  }
-  
-  @media only screen and (max-width: 400px) {
-    .product-card {
-      width: 100%;
-      padding: 10px;
-      margin: 5px;
-      font-size: 14px;
-    }
-  
-    .product-card img {
-      width: 100%;
-      height: auto;
-    }
-  
-    .product-card h3 {
-      font-size: 18px;
-    }
-  
-    .product-card p {
-      font-size: 12px;
-    }
-  }
