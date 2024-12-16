@@ -1,11 +1,10 @@
-/* Sidebar.css */
 .sidebar {
   width: 250px;
-  height: 100%;
+  height: 100%; /* Full height */
   background-color: #333;
   color: #fff;
   position: fixed;
-  top: 0;
+  top: 0; /* Ensure it starts from the top */
   left: 0;
   padding: 1rem;
   display: flex;
@@ -13,6 +12,7 @@
   justify-content: space-between;
   transition: transform 0.3s ease-in-out;
   transform: translateX(0);
+  z-index: 999; /* Ensure it is below the Navbar */
 }
 
 .sidebar.hidden {
@@ -32,6 +32,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1; /* Ensure the nav takes up available space */
 }
 
 .sidebar nav ul li {
@@ -63,6 +64,7 @@
 
 .logout {
   margin-top: auto;
+  margin-bottom: 30px;
 }
 
 .logout a {

@@ -1,0 +1,58 @@
+/* Navbar.css */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 282.5px; /* Adjust based on the width of your Sidebar */
+  width: calc(100% - 250px); /* Adjust based on the width of your Sidebar */
+  height: 60px; /* Adjusted height */
+  background: rgba(0, 0, 0, 0.8); /* Dark and transparent */
+  color: #fff;
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  justify-content: space-between; /* Space between elements */
+  align-items: center; /* Center items vertically */
+  padding: 0 20px; /* Horizontal padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure it is above other elements */
+}
+
+.navbar h3 {
+  font-size: 1.5rem;
+}
+
+.navbar nav ul {
+  list-style: none;
+  display: flex; /* Horizontal layout */
+  padding: 0;
+  margin: 0;
+}
+
+.navbar nav ul li {
+  margin: 0 15px;
+}
+
+.navbar nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffd700; /* Gold hover effect */
+}
+
+.navbar nav ul li:last-child a {
+  background: rgba(255, 0, 0, 0.8); /* Red for logout */
+  color: #fff;
+  font-weight: bold;
+}
+
+.navbar nav ul li:last-child a:hover {
+  background: rgba(255, 0, 0, 0.9);
+  color: #000;
+}

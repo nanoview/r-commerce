@@ -1,6 +1,6 @@
 import React, { useState, useMemo, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import "./styles/GlobalStyles.css"; // Updated to use the combined styles
+
 
 // Lazy load components
 const AuthComponent = lazy(() => import("./components/AuthComponent"));

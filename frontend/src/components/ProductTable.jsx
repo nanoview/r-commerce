@@ -67,7 +67,7 @@ const ProductTable = ({ products, updateProduct, deleteProduct }) => {
               <td>{product._id}</td>
               <td>{product.name}</td>
               <td>
-                <img src={product.photo ? `http://localhost:5000/uploads/${product.photo}` : product.photoUrl} alt={product.name} width="150" />
+                <img className="product-image" src={product.photo ? `http://localhost:5000/uploads/${product.photo}` : product.photoUrl} alt={product.name}  />
               </td>
               <td>{product.price}</td>
               <td>{product.quantity}</td>

@@ -1,10 +1,11 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const config = require('./config/config');
+const { connectDB } = require('./config/config');
 
 dotenv.config();
 
@@ -14,37 +15,37 @@ const bannerRoutes = require('./routes/bannerRoutes');
 const testRoute = require('./routes/testRoute');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = config.port || 5000;
 
+// Connect to MongoDB
+connectDB();
+
+
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || config.allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
 app.use(express.json());
 app.use(morgan('combined'));  // Logging HTTP requests
 
-// MongoDB Connection
-const connectDB = async () => {
-  try {
-    console.log('Attempting to connect to MongoDB...');
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected');
-  } catch (error) {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
-  }
-};
-
-connectDB(); // Invoke the function to connect to MongoDB
-
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Routes
-app.use('/api', authRoutes);
 app.use('/api', productRoutes);
-app.use('/api', bannerRoutes);
-app.use('/api', testRoute);
+app.use('/api/auth', authRoutes);
+app.use('/api/banners', bannerRoutes);
+app.use('/api/test', testRoute);
 
 // File Upload Configuration
 const upload = multer({ dest: 'uploads/' });
@@ -62,6 +63,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal Server Error', error: err.message });
 });
 
+// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

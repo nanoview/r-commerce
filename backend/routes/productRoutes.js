@@ -5,7 +5,7 @@ const upload = require('../middleware/fileUploadMiddleware'); // Import the file
 const router = express.Router();
 
 router.get('/products', getProducts); // Public route for fetching products
-router.get('/:id', getProductById); //// Get product by ID
+router.get('/products/:id', getProductById); //// Get product by ID
 router.post('/products', authenticateToken, upload.single('photo'), createProduct); // Add multer middleware for file upload
 router.put('/products/:id', authenticateToken, upload.single('photo'), updateProduct); // Add multer middleware for file upload
 router.delete('/products/:id', authenticateToken, deleteProduct);

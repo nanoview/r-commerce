@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import AdminNavbar from './AdminNavbar';
 import ProductForm from './ProductForm';
 import ProductTable from './ProductTable';
 import ProductManagement from './ProductManagement';
@@ -107,7 +107,7 @@ const Dashboard = ({ token }) => {
 
   return (
     <div className="dashboard">
-      <Navbar />
+      <AdminNavbar />
       <button className="burger" onClick={toggleSidebar}>
         ☰
       </button>

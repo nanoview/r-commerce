@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { baseURL } from "../utils/api";
 
 const ProductCard = ({ product, loading }) => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const ProductCard = ({ product, loading }) => {
 
   const productImage = (
     <img
-      src={product.photo ? `http://localhost:5000/uploads/${product.photo}` : product.photoUrl}
+      src={product.photo ? `${baseURL}/uploads/${product.photo}` : product.photoUrl}
       alt={product.name}
       onClick={handlePhotoClick}
     />
