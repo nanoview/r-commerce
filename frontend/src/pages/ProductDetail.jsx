@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../components/homeNavbar";
 import "../styles/ProductDetail.css";
-import { baseURL, backURL } from "../utils/api";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -13,15 +13,11 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const url = `${backURL}/api/products/${id}`; // Replace with your API endpoint
-        console.log("Request URL:", url); // Log request URL
-        const response = await axios.get(url); // Fetch product by ID
-        console.log("Product data:", response.data); // Log response data
+        const response = await axios.get(`http://192.168.1.237:5000/api/products/${id}`);
         setProduct(response.data);
-      } catch (error) {
-        console.error("Error fetching product:", error.message);
-        setError(error.message);
-      } finally {
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
         setLoading(false);
       }
     };
@@ -34,15 +30,20 @@ const ProductDetail = () => {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="product-detail">
-      <div className="product-image">
-        <img src={product.photo ? `${baseURL}/uploads/${product.photo}` : product.photoUrl} alt={product.name} />
-      </div>
-      <div className="product-info">
-        <h1>{product.name}</h1>
-        <p className="product-description">{product.description}</p>
-        <p className="product-price">Price: ${product.price}</p>
-        <button className="add-to-cart">Add to Cart</button>
+    <div>
+      <Navbar />
+      <div className="product-detail-container">
+        <div className="product-detail">
+          <div className="product-image">
+            <img src={product.photo ? `http://192.168.1.237:5000/uploads/${product.photo}` : product.photoUrl} alt={product.name} />
+          </div>
+          <div className="product-info">
+            <h1>{product.name}</h1>
+            <p className="product-description">{product.description}</p>
+            <p className="product-price">Price: ${product.price}</p>
+            <button className="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./pages/homeNavbar"; // Updated import paths for clarity
+import Navbar from "./components/homeNavbar"; // Updated import paths for clarity
 import Banner from "./pages/Banner";
-import Filters from "./pages/Filters";
+import MiddleSpace  from "./pages/MiddleSpace";
 import ProductList from "./pages/ProductList";
 
 
@@ -10,7 +10,7 @@ const Home = () => {
     <div className="home">
       <Navbar />
       <Banner />
-      <Filters />
+      <MiddleSpace />
       <ProductList />
     </div>
   );

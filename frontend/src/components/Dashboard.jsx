@@ -9,6 +9,7 @@ import ProductTable from './ProductTable';
 import ProductManagement from './ProductManagement';
 import BannerForm from './BannerForm';
 import Form from './testForm';
+import DefaultDashboardContent from './DefaultDashboardContent';
 import "../styles/Dashboard.css"; 
 
 const Dashboard = ({ token }) => {
@@ -30,7 +31,7 @@ const Dashboard = ({ token }) => {
 
   const fetchProducts = async (token) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products', {
+      const response = await axios.get('http://192.168.1.237:5000/api/products', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProducts(response.data);
@@ -46,7 +47,7 @@ const Dashboard = ({ token }) => {
   const addProduct = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5000/api/products', newProduct, {
+      const response = await axios.post('http://192.168.1.237:5000/api/products', newProduct, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProducts([...products, response.data]);
@@ -59,7 +60,7 @@ const Dashboard = ({ token }) => {
   const updateProduct = async (id, updatedProduct) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(`http://localhost:5000/api/products/${id}`, updatedProduct, {
+      const response = await axios.put(`http://192.168.1.237:5000/api/products/${id}`, updatedProduct, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProducts(products.map(product => (product._id === id ? response.data : product)));
@@ -71,7 +72,7 @@ const Dashboard = ({ token }) => {
   const deleteProduct = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
+      await axios.delete(`http://192.168.1.237:5000/api/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProducts(products.filter(product => product._id !== id));
@@ -81,40 +82,32 @@ const Dashboard = ({ token }) => {
   };
 
   const startInactivityTimer = () => {
-    let timeout;
-
+    let timer;
     const resetTimer = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(logout, 15 * 60 * 1000); // 15 minutes
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        localStorage.removeItem('token');
+        navigate('/admin'); // Redirect to login after inactivity
+      }, 15 * 60 * 1000); // 15 minutes
     };
 
-    const logout = () => {
-      localStorage.removeItem('token');
-      navigate('/admin');
-    };
-
-    // Reset timer on activity
     window.onload = resetTimer;
     window.onmousemove = resetTimer;
+    window.onmousedown = resetTimer; // catches touchscreen presses
+    window.ontouchstart = resetTimer;
+    window.ontouchmove = resetTimer;
+    window.onclick = resetTimer; // catches touchpad clicks
     window.onkeypress = resetTimer;
-
-    resetTimer(); // Start the timer
-  };
-
-  const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
   };
 
   return (
     <div className="dashboard">
-      <AdminNavbar />
-      <button className="burger" onClick={toggleSidebar}>
-        ☰
-      </button>
-      <div className="main-content">
-        <Sidebar isSidebarVisible={isSidebarVisible} />
-        <div className={`content ${isSidebarVisible ? 'shifted' : ''}`}>
+      <Sidebar isVisible={isSidebarVisible} toggleSidebar={() => setIsSidebarVisible(!isSidebarVisible)} />
+      <div className={`main-content ${isSidebarVisible ? 'sidebar-visible' : ''}`}>
+        <AdminNavbar />
+        <div className="content">
           <Routes>
+            <Route path="/" element={<DefaultDashboardContent />} />
             <Route path="product-form" element={<ProductForm newProduct={newProduct} setNewProduct={setNewProduct} addProduct={addProduct} />} />
             <Route path="product-table" element={<ProductTable products={products} updateProduct={updateProduct} deleteProduct={deleteProduct} />} />
             <Route path="banner-management" element={<BannerForm />} />

@@ -4,8 +4,8 @@ import "../styles/HomeNavbar.css"; // Import the CSS file
 const HomeNavbar = () => {
   return (
     <div className="navbar-container">
-      <h3>Bioscope Handy craft</h3>
-      <p>bioscopehandycrafts.com</p>
+      <a href="https://bioscopehandycrafts.com" style={{ textDecoration: 'none' }}><h3>Bioscope Handy craft</h3></a>
+      <a href="https://bioscopehandycrafts.com"><p>bioscopehandycrafts.com</p></a>
     </div>
   );
 };

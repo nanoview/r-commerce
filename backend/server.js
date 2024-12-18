@@ -42,7 +42,7 @@ app.use(morgan('combined'));  // Logging HTTP requests
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
-app.use('/api', productRoutes);
+app.use('/api/', productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/banners', bannerRoutes);
 app.use('/api/test', testRoute);

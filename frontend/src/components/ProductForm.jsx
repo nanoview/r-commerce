@@ -1,39 +1,48 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
-import '../styles/Form.css';
+import '../styles/ProductForm.css';
 
-const ProductForm = ({ newProduct, setNewProduct, addProduct }) => {
-  const [photoLink, setPhotoLink] = useState('');
+const ProductForm = ({ addProduct }) => {
+  const [data, setData] = useState({
+    name: '',
+    price: '',
+    quantity: '',
+    description: '',
+    imageSize: 'short', // Default value for imageSize
+  });
   const [photoFile, setPhotoFile] = useState(null);
-  const [uploadingFile, setUploadingFile] = useState(false); // Track upload state
-  const [successMessage, setSuccessMessage] = useState(''); // Track success message
-  const fileInputRef = useRef(); // Reference to the file input element
-  const { register, handleSubmit, reset, formState: { isSubmitting } } = useForm();
+  const [photoLink, setPhotoLink] = useState('');
+  const [uploadingFile, setUploadingFile] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleFileChange = (e) => {
     setPhotoFile(e.target.files[0]);
-    setUploadingFile(true); // Set flag for uploaded file
+    setUploadingFile(true);
   };
 
-  const handleLinkChange = (e) => {
-    setPhotoLink(e.target.value);
-    setUploadingFile(false); // Set flag for external link
-  };
-
-  const onSubmit = async (data) => {
-    if (isSubmitting) return; // Prevent duplicate submissions
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('price', data.price);
     formData.append('quantity', data.quantity);
     formData.append('description', data.description);
+    formData.append('imageSize', data.imageSize);
 
     if (uploadingFile) { // Handle uploaded file
       formData.append('photo', photoFile);
+      formData.append('photoUrl', 'null');
     } else if (photoLink) { // Handle external link
       formData.append('photoUrl', photoLink);
+      formData.append('photo', 'null');
     }
 
     try {
@@ -46,7 +55,13 @@ const ProductForm = ({ newProduct, setNewProduct, addProduct }) => {
       });
       setSuccessMessage('Product added successfully!');
       setTimeout(() => setSuccessMessage(''), 3000); // Clear message after 3 seconds
-      reset(); // Reset form fields
+      setData({
+        name: '',
+        price: '',
+        quantity: '',
+        description: '',
+        imageSize: 'short', // Reset to default value
+      });
       setPhotoFile(null);
       setPhotoLink('');
       setUploadingFile(false);
@@ -57,36 +72,87 @@ const ProductForm = ({ newProduct, setNewProduct, addProduct }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="product-form">
-      <label>
-        Name:
-        <input type="text" {...register('name', { required: true })} />
-      </label>
-      <label>
-        Price:
-        <input type="number" {...register('price', { required: true })} />
-      </label>
-      <label>
-        Quantity:
-        <input type="number" {...register('quantity', { required: true })} />
-      </label>
-      <label>
-        Description:
-        <textarea {...register('description')} />
-      </label>
-      <label>
-        Image from device:
-        <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef} />
-      </label>
-      <label>
-        Image URL:
-        <input type="text" value={photoLink} onChange={handleLinkChange} />
-      </label>
-      {photoFile && <img src={URL.createObjectURL(photoFile)} alt="Preview" className="thumbnail" />}
-      {photoLink && <img src={photoLink} alt="Preview" className="thumbnail" onError={(e) => e.target.style.display = 'none'} />}
-      <button type="submit" disabled={isSubmitting}>Add Product</button>
+    <div className="product-form-container">
       {successMessage && <div className="success-message">{successMessage}</div>}
-    </form>
+      <form onSubmit={handleSubmit} className="product-form">
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={data.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={data.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="quantity">Quantity</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            value={data.quantity}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            value={data.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="imageSize">Image Size</label>
+          <select
+            id="imageSize"
+            name="imageSize"
+            value={data.imageSize}
+            onChange={handleChange}
+            required
+          >
+            <option value="short">Short</option>
+            <option value="long">Long</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="photo">Photo</label>
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            onChange={handleFileChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="photoLink">Photo URL</label>
+          <input
+            type="text"
+            id="photoLink"
+            name="photoLink"
+            value={photoLink}
+            onChange={(e) => setPhotoLink(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="submit-button">Add Product</button>
+      </form>
+    </div>
   );
 };
 

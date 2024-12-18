@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
   description: { type: String },
   photo: { type: String }, // File path to the photo
   photoUrl: { type: String }, // URL to the photo
+  imageSize: { type: String },
 });
 
 const Product = mongoose.model('Product', productSchema);

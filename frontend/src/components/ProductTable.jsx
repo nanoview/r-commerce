@@ -1,55 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/ProductTable.css';
-import '../styles/Modal.css'; // New CSS for modal responsiveness
-
+import '../styles/Modal.css';
 
 const ProductTable = ({ products, updateProduct, deleteProduct }) => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [updatedProduct, setUpdatedProduct] = useState({});
-  const [newImage, setNewImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalState, setModalState] = useState({
+    selectedProduct: null,
+    updatedProduct: {},
+    newImage: null,
+    imageUrl: '',
+    isOpen: false,
+  });
   const [successMessage, setSuccessMessage] = useState('');
 
   const openModal = (product) => {
-    setSelectedProduct(product);
-    setUpdatedProduct({ ...product });
-    setImageUrl(product.photoUrl || '');
-    setIsModalOpen(true);
+    setModalState({
+      selectedProduct: product,
+      updatedProduct: { ...product },
+      newImage: null,
+      imageUrl: product.photoUrl || '',
+      isOpen: true,
+    });
   };
 
   const handleInputChange = (e, field) => {
-    setUpdatedProduct({ ...updatedProduct, [field]: e.target.value });
+    setModalState((prevState) => ({
+      ...prevState,
+      updatedProduct: {
+        ...prevState.updatedProduct,
+        [field]: e.target.value,
+      },
+    }));
   };
 
   const handleImageChange = (e) => {
-    setNewImage(e.target.files[0]);
+    setModalState((prevState) => ({
+      ...prevState,
+      newImage: e.target.files[0],
+    }));
   };
 
   const handleSave = async () => {
+    const { selectedProduct, updatedProduct, newImage, imageUrl } = modalState;
+
+    if (!updatedProduct.name || !updatedProduct.price || !updatedProduct.quantity) {
+      alert('Name, price, and quantity are mandatory fields!');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('name', updatedProduct.name);
     formData.append('price', updatedProduct.price);
     formData.append('quantity', updatedProduct.quantity);
+    formData.append('description', updatedProduct.description);
+    formData.append('imageSize', updatedProduct.imageSize);
     if (newImage) formData.append('photo', newImage);
     formData.append('photoUrl', imageUrl);
 
     try {
       await updateProduct(selectedProduct._id, formData);
-      setIsModalOpen(false);
-      setNewImage(null);
-      setImageUrl('');
+      setModalState({ selectedProduct: null, updatedProduct: {}, newImage: null, imageUrl: '', isOpen: false });
       setSuccessMessage('Product updated successfully!');
-      setTimeout(() => setSuccessMessage(''), 3000); // Clear message after 3 seconds
+      setTimeout(() => setSuccessMessage(''), 3000);
     } catch (error) {
       console.error('Error saving product:', error);
     }
   };
 
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      deleteProduct(id);
+    }
+  };
+
   return (
-    <div>
-      {successMessage && <div className="success-message">{successMessage}</div>}
-      <table>
+    <div className='product-table-container'>
+      {successMessage && <div className='success-message'>{successMessage}</div>}
+      <table className='product-table'>
         <thead>
           <tr>
             <th>Product ID</th>
@@ -62,71 +88,105 @@ const ProductTable = ({ products, updateProduct, deleteProduct }) => {
           </tr>
         </thead>
         <tbody>
-          {products.map(product => (
+          {products.map((product) => (
             <tr key={product._id}>
               <td>{product._id}</td>
               <td>{product.name}</td>
               <td>
-                <img className="product-image" src={product.photo ? `http://localhost:5000/uploads/${product.photo}` : product.photoUrl} alt={product.name}  />
+                <img
+                  className='product-image'
+                  src={product.photo ? `http://192.168.1.237:5000/uploads/${product.photo}` : product.photoUrl}
+                  alt={product.name}
+                  onError={(e) => (e.target.src = '/path-to-placeholder.png')}
+                />
               </td>
               <td>{product.price}</td>
               <td>{product.quantity}</td>
-              <td className="actions">
+              <td className='actions'>
                 <button onClick={() => openModal(product)}>Edit</button>
               </td>
-              <td className="actions">
-                <button onClick={() => deleteProduct(product._id)}>Delete</button>
+              <td className='actions'>
+                <button onClick={() => handleDelete(product._id)}>Delete</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
+      {modalState.isOpen && (
+        <div className='modal'>
+          <div className='modal-content'>
             <h3>Edit Product</h3>
             <label>
               Name:
               <input
-                type="text"
-                value={updatedProduct.name}
+                type='text'
+                value={modalState.updatedProduct.name}
                 onChange={(e) => handleInputChange(e, 'name')}
+              />
+            </label>
+            <label>
+              Description:
+              <input
+                type='text'
+                value={modalState.updatedProduct.description}
+                onChange={(e) => handleInputChange(e, 'description')}
               />
             </label>
             <label>
               Price:
               <input
-                type="number"
-                value={updatedProduct.price}
+                type='number'
+                value={modalState.updatedProduct.price}
                 onChange={(e) => handleInputChange(e, 'price')}
               />
             </label>
             <label>
               Quantity:
               <input
-                type="number"
-                value={updatedProduct.quantity}
+                type='number'
+                value={modalState.updatedProduct.quantity}
                 onChange={(e) => handleInputChange(e, 'quantity')}
               />
             </label>
             <label>
+              Image Size:
+              <select
+                value={modalState.updatedProduct.imageSize}
+                onChange={(e) => handleInputChange(e, 'imageSize')}
+              >
+                <option value='short'>Short</option>
+                <option value='long'>Long</option>
+              </select>
+            </label>
+            <label>
               Image from device:
-              <input type="file" accept="image/*" onChange={handleImageChange} />
+              <input type='file' accept='image/*' onChange={handleImageChange} />
             </label>
             <label>
               Image URL:
               <input
-                type="text"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
+                type='text'
+                value={modalState.imageUrl}
+                onChange={(e) =>
+                  setModalState((prevState) => ({ ...prevState, imageUrl: e.target.value }))
+                }
               />
             </label>
-            {newImage && <img src={URL.createObjectURL(newImage)} alt="Preview" width="150" />}
-            {imageUrl && <img src={imageUrl} alt="Preview" width="150" onError={(e) => e.target.style.display = 'none'} />}
-            <div className="modal-actions">
+            {modalState.newImage && (
+              <img src={URL.createObjectURL(modalState.newImage)} alt='Preview' width='150' />
+            )}
+            {modalState.imageUrl && (
+              <img
+                src={modalState.imageUrl}
+                alt='Preview'
+                width='150'
+                onError={(e) => (e.target.style.display = 'none')}
+              />
+            )}
+            <div className='modal-actions'>
               <button onClick={handleSave}>Save</button>
-              <button onClick={() => setIsModalOpen(false)}>Cancel</button>
+              <button onClick={() => setModalState({ ...modalState, isOpen: false })}>Cancel</button>
             </div>
           </div>
         </div>

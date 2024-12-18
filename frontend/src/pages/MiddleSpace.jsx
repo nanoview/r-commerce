@@ -1,6 +1,6 @@
 import React from "react";
 
-const Filters = () => {
+const MiddleSpace  = () => {
   return (
     <div className="filters container">
       {/* <button>Headphone Type</button>
@@ -15,4 +15,4 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default MiddleSpace ;
