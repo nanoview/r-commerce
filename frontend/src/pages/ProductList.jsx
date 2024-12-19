@@ -1,37 +1,34 @@
-import React, { useState, useEffect } from "react";
-import ProductCard from "./ProductCard";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ProductCard from "../components/ProductCard";
 import "../styles/ProductList.css";
-import { baseURL } from "../utils/api";
+import { backURL } from "../utils/api";
 
-const ProductList = () => {
+const ProductList = ({ }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     const fetchProducts = async () => {
-
       try {
-        const response = await axios.get(`${baseURL}/api/products`); // Replace with your API endpoint
-     
+        const response = await axios.get(`${backURL}/api/products`); // Replace with your API endpoint
         console.log("Fetched products:", response.data); // Debugging: Log fetched products
-        setProducts(response.data);
+        setProducts(Array.isArray(response.data) ? response.data : []); // Ensure response data is an array
       } catch (error) {
         console.error("Error fetching products:", error);
+        setProducts([]); // Ensure products is an array even on error
       } finally {
         setLoading(false);
       }
     };
 
     fetchProducts();
-  }, []);
+  }, [backURL]);
 
   return (
-    <div>
-      <h3>Please select the product you want from below</h3>
+    <div className="product-list-container">
+      <h3>Please choose which one you want</h3>
       <div className="product-list">
-        
         {loading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <ProductCard key={index} loading={true} />

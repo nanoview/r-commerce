@@ -1,87 +1,24 @@
-/* General styles for product list */
+/* General styles for product list container */
+.product-list-container {
+  padding: 20px;
+  background-color: #f5f5f5; /* Light background color */
+  text-align: center;
+}
+
+.product-list-container h3 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333; /* Dark text color */
+}
+
+/* Product list grid */
 .product-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
   justify-content: center;
   background-color: #121212; /* Dark background */
-}
-
-/* Product Card Styles */
-.product-card {
-  background: #1e1e1e; /* Dark card background */
-  padding: 2px;
-  width: calc(25% - 20px);
-  aspect-ratio: 1 / 1; /* Ensure the card is square */
-  box-shadow: 0px 4px 20px rgb(69, 8, 69);
-  text-align: center;
-  transition: box-shadow 0.3s ease-in-out;
-  margin: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff; /* Light text color */
-}
-.product-card:hover {
-  box-shadow: 0px 4px 20px rgba(255, 0, 255, 0.7); /* Magenta box shadow on hover */
-}
-
-.product-card.long {
-  flex-direction: row;
-  width: 100%;
-  height: auto; /* Ensure long cards take full width */
-}
-
-.product-image-container {
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%; /* This creates a square aspect ratio */
-  position: relative;
-}
-
-.product-card.long .product-image-container {
-  width: 50%;
-  height: auto;
-  padding-bottom: 0; /* Remove padding-bottom for long images */
-}
-
-.product-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  margin: 0; /* Remove margin */
-  padding: 0; /* Remove padding */
-}
-
-.product-info {
-  padding: 10px;
-  width: 100%;
-}
-
-.product-card.long .product-info {
-  width: 50%;
-  padding: 20px; /* Add padding for long images */
-}
-
-.product-info h3 {
-  margin-top: 0;
-  font-size: 1.2em;
-}
-
-.product-info p {
-  font-size: 1em;
-  color: #cccccc; /* Light gray text color */
-}
-
-.product-price {
-  font-size: 1.2em;
-  color: #ffffff; /* Light text color */
-  margin-top: 10px;
+  padding: 20px;
 }
 
 /* Loading Placeholder Styles */
@@ -103,165 +40,10 @@
   margin-bottom: 10px;
 }
 
-/* Product Detail Styles */
-.product-detail-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.product-detail {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  width: 100%;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-detail .product-image {
-  flex: 1 1 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.product-detail .product-image img {
-  max-width: 100%;
-  max-height: 400px;
-  object-fit: contain;
-}
-
-.product-detail .product-info {
-  flex: 1 1 50%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.product-detail .product-info h1 {
-  margin: 0 0 10px;
-  font-size: 2em;
-  color: #333;
-}
-
-.product-detail .product-description {
-  font-size: 1em;
-  color: #666;
-  margin: 10px 0;
-}
-
-.product-detail .product-price {
-  font-size: 1.5em;
-  color: #000;
-  margin: 20px 0;
-  font-weight: bold;
-}
-
-.add-to-cart {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
-}
-
-.add-to-cart:hover {
-  background-color: #0056b3;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
-  .product-card {
-    width: calc(50% - 20px);
-    aspect-ratio: 1 / 1; /* Ensure the card is square */
-  }
-
-  .product-card.long .product-image-container {
-    width: 100%;
-  }
-
-  .product-card.long {
+  .product-list {
     flex-direction: column;
-  }
-
-  .product-info h3 {
-    font-size: 1em;
-  }
-
-  .product-info p {
-    font-size: 0.9em;
-  }
-
-  .product-price {
-    font-size: 1em;
-  }
-}
-
-@media (max-width: 480px) {
-  .product-card {
-    width: calc(100% - 20px);
-    aspect-ratio: 1 / 1; /* Ensure the card is square */
-  }
-
-  .product-info {
-    padding: 10px;
-  }
-
-  .product-info h3 {
-    font-size: 1em;
-  }
-
-  .product-info p {
-    font-size: 0.8em;
-  }
-
-  .product-price {
-    font-size: 0.9em;
-  }
-}
-
-/* Responsive Design for Product Detail */
-@media (max-width: 768px) {
-  .product-detail .product-info {
-    padding: 15px;
-  }
-
-  .product-detail .product-info h1 {
-    font-size: 1.5em;
-  }
-
-  .product-detail .product-description {
-    font-size: 0.9em;
-  }
-
-  .product-detail .product-price {
-    font-size: 1.2em;
-  }
-}
-
-@media (max-width: 480px) {
-  .product-detail .product-info {
-    padding: 10px;
-  }
-
-  .product-detail .product-info h1 {
-    font-size: 1.2em;
-  }
-
-  .product-detail .product-description {
-    font-size: 0.8em;
-  }
-
-  .product-detail .product-price {
-    font-size: 1em;
+    align-items: center;
   }
 }

@@ -34,16 +34,7 @@
   margin: 0.5rem 0;
 }
 
-.product-image {
-  flex: 1 1 300px;
-  max-width: 500px;
-}
 
-.product-image img {
-  width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
-}
 
 .product-info {
   flex: 2 1 300px;

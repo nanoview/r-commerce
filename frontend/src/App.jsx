@@ -1,16 +1,15 @@
-import React, { useState, useMemo, lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useMemo, Suspense, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
+import ProductDetail from './pages/ProductDetail';
+import AuthComponent from './components/AuthComponent';
+import Dashboard from './components/Dashboard';
+import LogoutComponent from './components/LogoutComponent';
 import Footer from './components/Footer';
-
-// Lazy load components
-const AuthComponent = lazy(() => import("./components/AuthComponent"));
-const Dashboard = lazy(() => import("./components/Dashboard"));
-const LogoutComponent = lazy(() => import("./components/LogoutComponent"));
-const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-const Home = lazy(() => import("./pages/Home"));
+import './styles/App.css';
 
 const App = () => {
-  const [token, setToken] = useState(() => localStorage?.getItem("token") || "");
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const isAuthenticated = useMemo(() => {
     return !!localStorage.getItem("token");
