@@ -1,7 +1,7 @@
 .sidebar {
   width: 250px;
   height: 100%; /* Full height */
-  background-color: #333;
+  background-color: #333; /* Dark background */
   color: #fff;
   position: fixed;
   top: 0; /* Ensure it starts from the top */
@@ -32,7 +32,6 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1; /* Ensure the nav takes up available space */
 }
 
 .sidebar nav ul li {
@@ -75,7 +74,6 @@
   text-align: center;
   border-radius: 4px;
   text-decoration: none;
-  transition: background-color 0.3s ease-in-out;
 }
 
 .logout a:hover {

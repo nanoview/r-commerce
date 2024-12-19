@@ -28,7 +28,7 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     const { name, price, quantity, description, photoUrl, imageSize } = req.body;
-    const photo = req.file ? req.file.filename : photoUrl; // Use filename if file is uploaded, otherwise use photo URL
+    const photo = req.file ? req.file.filename : null; // Use filename if file is uploaded, otherwise null
     const newProduct = new Product({ name, price, quantity, description, photo, photoUrl, imageSize });
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
@@ -44,7 +44,8 @@ const updateProduct = async (req, res) => {
     const { name, price, quantity, description, photoUrl, imageSize } = req.body;
     let updatedFields = { name, price, quantity, description, photoUrl, imageSize };
     if (req.file) {
-      updatedFields.photo = `uploads/${req.file.filename}`;
+      updatedFields.photo = req.file.filename;
+      updatedFields.photoUrl = null; // Clear photoUrl if a new file is uploaded
     }
     const updatedProduct = await Product.findByIdAndUpdate(id, updatedFields, { new: true });
     if (updatedProduct) {

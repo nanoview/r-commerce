@@ -14,7 +14,7 @@ const ProductList = () => {
 
       try {
         const response = await axios.get(`${baseURL}/api/products`); // Replace with your API endpoint
-        console.log("🚀 ~ fetchProducts ~ response:", response)
+     
         console.log("Fetched products:", response.data); // Debugging: Log fetched products
         setProducts(response.data);
       } catch (error) {
@@ -29,8 +29,9 @@ const ProductList = () => {
 
   return (
     <div>
-      <h3>Your product list appear here</h3>
+      <h3>Please select the product you want from below</h3>
       <div className="product-list">
+        
         {loading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <ProductCard key={index} loading={true} />

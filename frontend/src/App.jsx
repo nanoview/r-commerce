@@ -1,13 +1,13 @@
 import React, { useState, useMemo, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-
+import Footer from './components/Footer';
 
 // Lazy load components
 const AuthComponent = lazy(() => import("./components/AuthComponent"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const LogoutComponent = lazy(() => import("./components/LogoutComponent"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-const Home = lazy(() => import("./Home"));
+const Home = lazy(() => import("./pages/Home"));
 
 const App = () => {
   const [token, setToken] = useState(() => localStorage?.getItem("token") || "");
@@ -31,6 +31,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
           </Routes>
         </Suspense>
+        <Footer />
       </div>
     </Router>
   );

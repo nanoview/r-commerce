@@ -1,0 +1,10 @@
+.filters.container {
+ 
+}
+
+.color-bar {
+  width: 100%;
+  height: 5px; /* Adjust the height as needed */
+  background: linear-gradient(to right, green, red, orange, green); /* Rainbow gradient */
+  margin-bottom: 20px; /* Space below the color bar */
+}

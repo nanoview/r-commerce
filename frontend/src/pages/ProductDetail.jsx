@@ -35,7 +35,14 @@ const ProductDetail = () => {
       <div className="product-detail-container">
         <div className="product-detail">
           <div className="product-image">
-            <img src={product.photo ? `http://192.168.1.237:5000/uploads/${product.photo}` : product.photoUrl} alt={product.name} />
+            <img
+              src={
+                product.photo
+                  ? `http://192.168.1.237:5000/uploads/${product.photo}`
+                  : product.photoUrl
+              }
+              alt={product.name}
+            />
           </div>
           <div className="product-info">
             <h1>{product.name}</h1>

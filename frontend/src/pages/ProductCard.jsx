@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { baseURL } from "../utils/api";
+import { useNavigate } from "react-router-dom";
+import "../styles/ProductList.css";
 
 const ProductCard = ({ product, loading }) => {
   const navigate = useNavigate();
@@ -11,31 +11,31 @@ const ProductCard = ({ product, loading }) => {
 
   if (loading) {
     return (
-      <div className="product-card skeleton">
-        <div className="skeleton-image"></div>
-        <div className="skeleton-text"></div>
-        <div className="skeleton-text"></div>
-        <div className="skeleton-button"></div>
+      <div className="product-card loading">
+        <div className="image-placeholder"></div>
+        <div className="text-placeholder"></div>
+        <div className="text-placeholder"></div>
       </div>
     );
   }
 
-  const productImage = (
-    <img
-      src={product.photo ? `${baseURL}/uploads/${product.photo}` : product.photoUrl}
-      alt={product.name}
-      onClick={handlePhotoClick}
-    />
-  );
+  const isLongImage = product.imageSize === "long";
 
   return (
-    <div className="product-card">
-      <Link to={`/product/${product._id}`}>
-        {productImage}
-      </Link>
-      <h3>{product.name}</h3>
-      <p>${product.price}</p>
-      <button>Add to Cart</button>
+    <div className={`product-card ${isLongImage ? "long" : ""}`}>
+      <div className="product-image-container">
+        <img
+          src={product.photo ? `http://192.168.1.237:5000/uploads/${product.photo}` : product.photoUrl}
+          alt={product.name}
+          className="product-image"
+          onClick={handlePhotoClick}
+        />
+      </div>
+      <div className="product-info">
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+        <p className="product-price">${product.price}</p>
+      </div>
     </div>
   );
 };
